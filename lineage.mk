@@ -17,7 +17,8 @@
 $(call inherit-product, device/htc/flounder/lineage.mk)
 
 # Inherit some common CM stuff.
-$(call inherit-product, vendor/cm/config/telephony.mk)
+$(call inherit-product, vendor/cm/config/common_full_phone.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 # Assert for recovery compatibility
 TARGET_OTA_ASSERT_DEVICE := flounder,flounder_lte
@@ -28,6 +29,9 @@ $(call inherit-product-if-exists, vendor/htc/flounder_lte/device-vendor.mk)
 # LTE Overlays
 DEVICE_PACKAGE_OVERLAYS += \
     device/htc/flounder/lte_only_overlay
+
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     PRODUCT_NAME=flounder_lte \
